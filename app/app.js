@@ -1,9 +1,11 @@
 angular.module('uifordocker', [
     'uifordocker.templates',
     'ngRoute',
+    'LocalStorageModule',
     'uifordocker.services',
     'uifordocker.filters',
     'masthead',
+    'aside',
     'footer',
     'dashboard',
     'container',

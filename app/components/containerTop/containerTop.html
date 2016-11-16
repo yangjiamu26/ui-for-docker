@@ -1,29 +1,43 @@
-<div class="containerTop">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>Top for: {{ containerName }}</h1>
+<div class="bg-light lter b-b wrapper-sm">
+  <ol class="breadcrumb">
+    <li>当前位置：</li>
+    <li>首页</li>
+    <li><a href="#/containers/">容器</a></li>
+    <li><a href="#/containers/{{ container.Id }}/">容器详情</a></li>
+  </ol>
+</div>
+<div class="app-content-body page-content-area" >
+  <div class="wrapper-md">
+      <div class="bg-white-only b b-blue">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Top for: {{ containerName }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-2">
+                    <input type="text" class="form-control" placeholder="[options] (aux)" ng-model="ps_args">
+                </div>
+                <button type="button" class="btn btn-default" ng-click="getTop()">Submit</button>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="title in containerTop.Titles">{{title}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="processInfos in containerTop.Processes">
+                            <td ng-repeat="processInfo in processInfos track by $index">{{processInfo}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="form-group col-xs-2">
-            <input type="text" class="form-control" placeholder="[options] (aux)" ng-model="ps_args">
-        </div>
-        <button type="button" class="btn btn-default" ng-click="getTop()">Submit</button>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th ng-repeat="title in containerTop.Titles">{{title}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="processInfos in containerTop.Processes">
-                    <td ng-repeat="processInfo in processInfos track by $index">{{processInfo}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+</div>
 </div>

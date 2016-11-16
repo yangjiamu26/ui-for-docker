@@ -17,6 +17,7 @@ angular.module('containerTop', [])
 
         Container.get({id: $routeParams.id}, function (d) {
             $scope.containerName = d.Name.substring(1);
+            $scope.container = d;
         }, function (e) {
             Messages.error("Failure", e.data);
         });

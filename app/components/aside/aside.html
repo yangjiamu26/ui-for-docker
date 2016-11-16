@@ -1,0 +1,52 @@
+
+      <div class="aside-wrap">
+          <div class="navi-wrap">
+            <nav class="navi clearfix" ui-nav="" >
+              <ul class="nav navbox">
+                <li ng-class="{'actived':current_menu=='home'}" ng-click="active('home')" >
+                  <a href="#/">
+                  <i class="icon home"></i>
+                    <span class="text-base">首页</span></a>
+                </li>
+                <li ng-class="{'actived':current_menu=='container'}" ng-click="active('container')">
+                  <a href="#/containers/">
+                    <i class="icon containers"></i>
+                    <span class="text-base">容器</span></a>
+                </li>
+                <li ng-class="{'actived':current_menu=='container_network'}" ng-click="active('container_network')">
+                  <a href="#/containers_network/">
+                    <i class="icon containers_network"></i>
+                    <span class="text-base">容器网络</span>
+                  </a>
+                </li>
+                <li ng-class="{'actived':current_menu=='images'}" ng-click="active('images')">
+                  <a href="#/images/">
+                    <i class="icon images"></i>
+                    <span class="text-base">镜像</span>
+                  </a>
+                </li>
+                <li ng-class="{'actived':current_menu=='networks'}" ng-click="active('networks')"><!-- ng-if="showNetworksVolumes" -->
+                  <a href="#/networks/">
+                    <i class="icon networks"></i>
+                    <span class="text-base">网络</span>
+                  </a>
+                </li>                 
+                 <li ng-class="{'actived':current_menu=='volumes'}" ng-click="active('volumes')">
+                  <a href="#/volumes/">
+                    <i class="icon volumes"></i>
+                    <span class="text-base">数据卷</span>
+                  </a>
+                </li>  
+                 <li ng-class="{'actived':current_menu=='info'}" ng-click="active('info')">
+                  <a href="#/info/">
+                    <i class="icon info"></i>
+                    <span class="text-base">平台信息</span>
+                  </a>
+                </li>                                
+                
+              </ul>
+           
+              
+            </nav>
+          </div>
+        </div>

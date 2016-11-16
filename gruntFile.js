@@ -158,7 +158,8 @@ module.exports = function (grunt) {
                     'bower_components/angular-resource/angular-resource.js',
                     'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                     'bower_components/angular-oboe/dist/angular-oboe.js',
-                    'bower_components/angular-visjs/angular-vis.js'],
+                    'bower_components/angular-visjs/angular-vis.js',
+                    'bower_components/angular-local-storage/dist/angular-local-storage.js'],
                 dest: '<%= distdir %>/angular.js'
             }
         },

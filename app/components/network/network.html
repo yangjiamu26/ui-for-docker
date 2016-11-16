@@ -1,110 +1,118 @@
-<div class="detail">
-
+<div class="bg-light lter b-b wrapper-sm">
+  <ol class="breadcrumb">
+    <li>当前位置：</li>
+    <li>Network: {{ network.Name }}</li>
+  </ol>
+</div>
+<div class="app-content-body page-content-area" >
+  <div class="wrapper-md">
     <h4>Network: {{ network.Name }}</h4>
-
-    <table class="table table-striped">
-        <tbody>
-        <tr>
-            <td>Name:</td>
-            <td>{{ network.Name }}</td>
-        </tr>
-        <tr>
-            <td>Id:</td>
-            <td>{{ network.Id }}</td>
-        </tr>
-        <tr>
-            <td>Scope:</td>
-            <td>{{ network.Scope }}</td>
-        </tr>
-        <tr>
-            <td>Driver:</td>
-            <td>{{ network.Driver }}</td>
-        </tr>
-        <tr>
-            <td>IPAM:</td>
-            <td>
-                <table class="table table-striped">
-                    <tr>
-                        <td>Driver:</td>
-                        <td>{{ network.IPAM.Driver }}</td>
-                    </tr>
-                    <tr>
-                        <td>Subnet:</td>
-                        <td>{{ network.IPAM.Config[0].Subnet }}</td>
-                    </tr>
-                    <tr>
-                        <td>Gateway:</td>
-                        <td>{{ network.IPAM.Config[0].Gateway }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>Containers:</td>
-            <td>
-                <table class="table table-striped" ng-repeat="(Id, container) in network.Containers">
-                    <tr>
-                        <td>Id:</td>
-                        <td><a href="#/containers/{{ Id }}">{{ Id }}</a></td>
-                        <td>
-                            <button ng-click="disconnect(network.Id, Id)" class="btn btn-danger btn-sm">
-                                Disconnect from network
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>EndpointID:</td>
-                        <td>{{ container.EndpointID}}</td>
-                    </tr>
-                    <tr>
-                        <td>MacAddress:</td>
-                        <td>{{ container.MacAddress}}</td>
-                    </tr>
-                    <tr>
-                        <td>IPv4Address:</td>
-                        <td>{{ container.IPv4Address}}</td>
-                    </tr>
-                    <tr>
-                        <td>IPv6Address:</td>
-                        <td>{{ container.IPv6Address}}</td>
-                    </tr>
-                </table>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label>Container ID:
-                            <input ng-model="containerId" placeholder="3613f73ba0e4" class="form-control">
-                        </label>
-                    </div>
-                    <button ng-click="connect(network.Id, containerId)" class="btn btn-primary">
-                        Connect
-                    </button>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>Options:</td>
-            <td>
-                <table role="table" class="table table-striped">
-                    <tr>
-                        <th>Key</th>
-                        <th>Value</th>
-                    </tr>
-                    <tr ng-repeat="(k, v) in network.Options">
-                        <td>{{ k }}</td>
-                        <td>{{ v }}</td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-
-    <hr/>
+    <div class="bg-white-only b b-blue">
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <td>名称:</td>
+                <td>{{ network.Name }}</td>
+            </tr>
+            <tr>
+                <td>Id:</td>
+                <td>{{ network.Id }}</td>
+            </tr>
+            <tr>
+                <td>范围:</td>
+                <td>{{ network.Scope }}</td>
+            </tr>
+            <tr>
+                <td>Driver:</td>
+                <td>{{ network.Driver }}</td>
+            </tr>
+            <tr>
+                <td>IPAM:</td>
+                <td>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>驱动:</td>
+                            <td>{{ network.IPAM.Driver }}</td>
+                        </tr>
+                        <tr>
+                            <td>分支网络:</td>
+                            <td>{{ network.IPAM.Config[0].Subnet }}</td>
+                        </tr>
+                        <tr>
+                            <td>网关:</td>
+                            <td>{{ network.IPAM.Config[0].Gateway }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>容器:</td>
+                <td>
+                    <table class="table table-striped" ng-repeat="(Id, container) in network.Containers">
+                        <tr>
+                            <td>Id:</td>
+                            <td><a href="#/containers/{{ Id }}">{{ Id }}</a></td>
+                            <td>
+                                <button ng-click="disconnect(network.Id, Id)" class="btn btn-danger btn-sm">
+                                    断开网络
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>末端ID:</td>
+                            <td>{{ container.EndpointID}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mac地址 :</td>
+                            <td>{{ container.MacAddress}}</td>
+                        </tr>
+                        <tr>
+                            <td>IPv4地址 :</td>
+                            <td>{{ container.IPv4Address}}</td>
+                        </tr>
+                        <tr>
+                            <td>IPv6地址 :</td>
+                            <td>{{ container.IPv6Address}}</td>
+                        </tr>
+                    </table>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label>容器 ID:
+                                <input ng-model="containerId" placeholder="3613f73ba0e4" class="form-control">
+                            </label>
+                        </div>
+                        <button ng-click="connect(network.Id, containerId)" class="btn btn-primary">
+                            连接
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>选项:</td>
+                <td>
+                    <table role="table" class="table table-striped">
+                        <tr>
+                            <th>键</th>
+                            <th>值</th>
+                        </tr>
+                        <tr ng-repeat="(k, v) in network.Options">
+                            <td>{{ k }}</td>
+                            <td>{{ v }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
 
-    <div class="btn-remove">
-        <button class="btn btn-large btn-block btn-primary btn-danger" ng-click="removeImage(id)">Remove Network
-        </button>
+        <hr/>
+
+
+        <div class="btn-remove wrapper">
+            <button class="btn btn-large btn-block btn-primary btn-danger" ng-click="removeImage(id)">删除网络
+            </button>
+        </div>
     </div>
+</div>
 </div>

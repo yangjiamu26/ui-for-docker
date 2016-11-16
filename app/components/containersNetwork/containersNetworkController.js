@@ -101,7 +101,7 @@ angular.module('containersNetwork', ['ngVis'])
             this.options = {
                 navigation: true,
                 keyboard: true,
-                height: '500px', width: '700px',
+                height: '500px', width: '90%',
                 nodes: {
                     shape: 'box'
                 },

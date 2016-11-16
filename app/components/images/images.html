@@ -1,64 +1,114 @@
 <div ng-include="template" ng-controller="BuilderController"></div>
-<div ng-include="template" ng-controller="PullImageController"></div>
+<!-- <div ng-include="template" ng-controller="PullImageController"></div> -->
+<div ng-include="template" ng-controller="StartContainerController"></div>
 
-<h2>Images:</h2>
-
-<div>
-    <ul class="nav nav-pills pull-left">
-        <li class="dropdown">
-            <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" data-target="#">Actions <b class="caret"></b></a>
-            <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
-                <li><a tabindex="-1" href="" ng-click="removeAction()">Remove</a></li>
-            </ul>
-        </li>
-        <li><a data-toggle="modal" data-target="#pull-modal" href="">Pull</a></li>
-    </ul>
-
-    <div class="pull-right form-inline">
-        <input type="text" class="form-control" id="filter" placeholder="Filter" ng-model="filter"/> <label class="sr-only" for="filter">Filter</label>
-    </div>
+<div class="bg-light lter b-b wrapper-sm">
+  <ol class="breadcrumb">
+    <li>当前位置：</li>
+     <li>首页</li>
+    <li>镜像</li>
+  </ol>
 </div>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th><label><input type="checkbox" ng-model="toggle" ng-change="toggleSelectAll()" /> Select</label></th>
-            <th>
-                <a href="#/images/" ng-click="order('Id')">
-                    Id
-                    <span ng-show="sortType == 'Id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                    <span ng-show="sortType == 'Id' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#/images/" ng-click="order('RepoTags')">
-                    Repository
-                    <span ng-show="sortType == 'RepoTags' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                    <span ng-show="sortType == 'RepoTags' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#/images/" ng-click="order('VirtualSize')">
-                    VirtualSize
-                    <span ng-show="sortType == 'VirtualSize' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                    <span ng-show="sortType == 'VirtualSize' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-            </th>
-            <th>
-                <a href="#/images/" ng-click="order('Created')">
-                    Created
-                    <span ng-show="sortType == 'Created' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                    <span ng-show="sortType == 'Created' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="image in (filteredImages = (images | filter:filter | orderBy:sortType:sortReverse))">
-            <td><input type="checkbox" ng-model="image.Checked" /></td>
-            <td><a href="#/images/{{ image.Id }}/?tag={{ image|repotag }}">{{ image.Id|truncate:20}}</a></td>
-            <td>{{ image|repotag }}</td>
-            <td>{{ image.VirtualSize|humansize }}</td>
-            <td>{{ image.Created * 1000 | date: 'yyyy-MM-dd' }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="app-content-body page-content-area" >
+  <div class="wrapper-md">
+   <div class="bg-white-only b b-blue ">
+    <div class="row " ng-controller="PullImageController">
+        <h3 style=" font-size: 18px; margin: 0; padding: 10px 30px">拉取镜像</h3>
+        <form novalidate role="form" name="pullForm" class="form-horizontal">
+                  <!--   <div class="form-group col-xs-4">
+                        <label class="col-sm-4 control-label">注册:</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="config.registry" class="form-control"
+                               placeholder="Registry. Leave empty to user docker hub"/>
+                        </div>
+                    </div> -->
+                    <div class="form-group col-xs-3">
+                        <label class="col-sm-4 control-label">镜像名称:</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="config.fromImage" class="form-control" placeholder="Image name" required/>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label class="col-sm-4 control-label">标签:</label>
+                        <div class="col-sm-8">
+                            <input type="text" ng-model="config.tag" class="form-control"
+                               placeholder="Tag name. If empty it will download ALL tags."/>
+                        </div>
+                    </div>
+               
+                     <div class="form-group col-xs-1">
+                        <a href="" class="btn btn-primary" ng-click="pull()">拉取</a>
+                    </div>
+                 </form>
+    </div>
+
+    <div class="alert alert-error" id="error-message" style="display:none">
+                {{ error }}
+    </div>
+    <hr>
+    <div class="row wrapper">
+
+        <ul class="nav nav-pills pull-left col-xs-6">
+            <li class="dropdown">
+                <a class="dropdown-toggle" id="drop4" role="button" data-toggle="dropdown" data-target="#">操作 <b class="caret"></b></a>
+                <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                    <li><a tabindex="-1" href="" ng-click="removeAction()">Remove</a></li>
+                </ul>
+            </li>
+          <!--   <li><a data-toggle="modal" data-target="#pull-modal" href="">Pull</a></li> -->
+
+        </ul>
+
+        <div class="pull-right form-inline col-xs-6 text-right">
+            <input type="text" class="form-control" id="filter" placeholder="Filter" ng-model="filter"/> <label class="sr-only" for="filter">过滤</label>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><label><input type="checkbox" ng-model="toggle" ng-change="toggleSelectAll()" /> 选择</label></th>
+                <th>
+                    <a href="#/images/" ng-click="order('Id')">
+                        Id
+                        <span ng-show="sortType == 'Id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="sortType == 'Id' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#/images/" ng-click="order('RepoTags')">
+                        存储库
+                        <span ng-show="sortType == 'RepoTags' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="sortType == 'RepoTags' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#/images/" ng-click="order('VirtualSize')">
+                        虚拟机大小
+                        <span ng-show="sortType == 'VirtualSize' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="sortType == 'VirtualSize' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                </th>
+                <th>
+                    <a href="#/images/" ng-click="order('Created')">
+                        创建日期
+                        <span ng-show="sortType == 'Created' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                        <span ng-show="sortType == 'Created' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                </th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="image in (filteredImages = (images | filter:filter | orderBy:sortType:sortReverse))">
+                <td><input type="checkbox" ng-model="image.Checked" /></td>
+                <td><a href="#/images/{{ image.Id }}/?tag={{ image|repotag }}">{{ image.Id|truncate:20}}</a></td>
+                <td>{{ image|repotag }}</td>
+                <td>{{ image.VirtualSize|humansize }}</td>
+                <td>{{ image.Created * 1000 | date: 'yyyy-MM-dd' }}</td>
+                <td><div class="btn-group detail"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#create-modal">启动容器</button> </div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>

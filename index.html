@@ -2,7 +2,7 @@
 <html lang="en" ng-app="<%= pkg.name %>">
 <head>
     <meta charset="utf-8">
-    <title>UI For Docker</title>
+    <title>Winhong Docker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="<%= pkg.author %>">
@@ -20,20 +20,21 @@
     <script src="vendor.js"></script>
     <script src="<%= pkg.name %>.js"></script>
 
-    <!-- Fav and touch icons -->
+    <!-- Fav and touch icons <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-precomposed.png">-->
     <link rel="shortcut icon" href="ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-precomposed.png">
+    
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="app container-fluid app-header-fixed app-aside-fixed">
+
         <div ng-include="template" ng-controller="MastheadController"></div>
+        <div ng-include="template" ng-controller="AsideController" class="app-aside hidden-xs bg-dark" id="aside"></div>
+        <div id="view" ng-view class="app-content"></div>
 
-        <div id="view" ng-view></div>
-
-        <div class="container-bottom"></div>
-        <div ng-include="template" ng-controller="FooterController"></div>
+       <!--  <div class="container-bottom"></div> -->
+        <div ng-include="template" class="app-footer" ng-controller="FooterController"></div>
     </div>
 
 

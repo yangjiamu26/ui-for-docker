@@ -1,110 +1,128 @@
-<div class="detail">
-    <h2>Docker Information</h2>
-
-    <div>
-        <p class="lead">
-            <strong>API Endpoint: </strong>{{ endpoint }}<br/>
-            <strong>API Version: </strong>{{ docker.ApiVersion }}<br/>
-            <strong>Docker version: </strong>{{ docker.Version }}<br/>
-            <strong>Git Commit: </strong>{{ docker.GitCommit }}<br/>
-            <strong>Go Version: </strong>{{ docker.GoVersion }}<br/>
-        </p>
+<div class="bg-light lter b-b wrapper-sm">
+  <ol class="breadcrumb">
+    <li>当前位置：</li>
+    <li>平台信息</li>
+  </ol>
+</div>
+<div class="app-content-body page-content-area" >
+  <div class="wrapper-md">
+    <div class="row">
+        <div class="col-xs-3">
+             <div class="panel panel-default dragDiv" >
+                <div  class="panel-heading text-base">主要信息</div>
+                    <div class="panel-body">
+                        <p class="lead">
+                            <strong>API 接口: </strong>{{ endpoint }}<br/>
+                            <strong>API 版本: </strong>{{ docker.ApiVersion }}<br/>
+                            <strong>Docker 版本: </strong>{{ docker.Version }}<br/>
+                            <strong>Git Commit: </strong>{{ docker.GitCommit }}<br/>
+                            <strong>Go 版本: </strong>{{ docker.GoVersion }}<br/>
+                        </p>
+                    </div>
+                </div>
+        </div>
+        <div class="col-xs-9">
+            <div class="bg-white-only b b-blue">
+                <div class="row wrapper">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>容器:</td>
+                            <td>{{ info.Containers }}</td>
+                        </tr>
+                        <tr>
+                            <td>镜像:</td>
+                            <td>{{ info.Images }}</td>
+                        </tr>
+                        <tr>
+                            <td>调试:</td>
+                            <td>{{ info.Debug }}</td>
+                        </tr>
+                        <tr>
+                            <td>CPUs:</td>
+                            <td>{{ info.NCPU }}</td>
+                        </tr>
+                        <tr>
+                            <td>总内存:</td>
+                            <td>{{ info.MemTotal|humansize }}</td>
+                        </tr>
+                        <tr>
+                            <td>操作系统:</td>
+                            <td>{{ info.OperatingSystem }}</td>
+                        </tr>
+                        <tr>
+                            <td>核心版本:</td>
+                            <td>{{ info.KernelVersion }}</td>
+                        </tr>
+                        <tr>
+                            <td>ID:</td>
+                            <td>{{ info.ID }}</td>
+                        </tr>
+                        <tr>
+                            <td>标签:</td>
+                            <td>{{ info.Labels }}</td>
+                        </tr>
+                        <tr>
+                            <td>文件描述:</td>
+                            <td>{{ info.NFd }}</td>
+                        </tr>
+                        <tr>
+                            <td>去程:</td>
+                            <td>{{ info.NGoroutines }}</td>
+                        </tr>
+                        <tr>
+                            <td>存储驱动:</td>
+                            <td>{{ info.Driver }}</td>
+                        </tr>
+                        <tr>
+                            <td>存储驱动状态:</td>
+                            <td>
+                                <p ng-repeat="val in info.DriverStatus">
+                                    {{ val[0] }}: {{ val[1] }}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>执行驱动程序:</td>
+                            <td>{{ info.ExecutionDriver }}</td>
+                        </tr>
+                        <tr>
+                            <td>事件:</td>
+                            <td><a href="#/events">Events</a></td>
+                        </tr>
+                        <tr>
+                            <td>IPv4 转发:</td>
+                            <td>{{ info.IPv4Forwarding }}</td>
+                        </tr>
+                        <tr>
+                            <td>索引服务器地址:</td>
+                            <td>{{ info.IndexServerAddress }}</td>
+                        </tr>
+                        <tr>
+                            <td>初始化路径:</td>
+                            <td>{{ info.InitPath }}</td>
+                        </tr>
+                        <tr>
+                            <td>Docker 根目录:</td>
+                            <td>{{ info.DockerRootDir }}</td>
+                        </tr>
+                        <tr>
+                            <td>初始化 SHA1</td>
+                            <td>{{ info.InitSha1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>内存限制:</td>
+                            <td>{{ info.MemoryLimit }}</td>
+                        </tr>
+                        <tr>
+                            <td>Swap 限制:</td>
+                            <td>{{ info.SwapLimit }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <table class="table table-striped">
-        <tbody>
-        <tr>
-            <td>Containers:</td>
-            <td>{{ info.Containers }}</td>
-        </tr>
-        <tr>
-            <td>Images:</td>
-            <td>{{ info.Images }}</td>
-        </tr>
-        <tr>
-            <td>Debug:</td>
-            <td>{{ info.Debug }}</td>
-        </tr>
-        <tr>
-            <td>CPUs:</td>
-            <td>{{ info.NCPU }}</td>
-        </tr>
-        <tr>
-            <td>Total Memory:</td>
-            <td>{{ info.MemTotal|humansize }}</td>
-        </tr>
-        <tr>
-            <td>Operating System:</td>
-            <td>{{ info.OperatingSystem }}</td>
-        </tr>
-        <tr>
-            <td>Kernel Version:</td>
-            <td>{{ info.KernelVersion }}</td>
-        </tr>
-        <tr>
-            <td>ID:</td>
-            <td>{{ info.ID }}</td>
-        </tr>
-        <tr>
-            <td>Labels:</td>
-            <td>{{ info.Labels }}</td>
-        </tr>
-        <tr>
-            <td>File Descriptors:</td>
-            <td>{{ info.NFd }}</td>
-        </tr>
-        <tr>
-            <td>Goroutines:</td>
-            <td>{{ info.NGoroutines }}</td>
-        </tr>
-        <tr>
-            <td>Storage Driver:</td>
-            <td>{{ info.Driver }}</td>
-        </tr>
-        <tr>
-            <td>Storage Driver Status:</td>
-            <td>
-                <p ng-repeat="val in info.DriverStatus">
-                    {{ val[0] }}: {{ val[1] }}
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>Execution Driver:</td>
-            <td>{{ info.ExecutionDriver }}</td>
-        </tr>
-        <tr>
-            <td>Events:</td>
-            <td><a href="#/events">Events</a></td>
-        </tr>
-        <tr>
-            <td>IPv4 Forwarding:</td>
-            <td>{{ info.IPv4Forwarding }}</td>
-        </tr>
-        <tr>
-            <td>Index Server Address:</td>
-            <td>{{ info.IndexServerAddress }}</td>
-        </tr>
-        <tr>
-            <td>Init Path:</td>
-            <td>{{ info.InitPath }}</td>
-        </tr>
-        <tr>
-            <td>Docker Root Directory:</td>
-            <td>{{ info.DockerRootDir }}</td>
-        </tr>
-        <tr>
-            <td>Init SHA1</td>
-            <td>{{ info.InitSha1 }}</td>
-        </tr>
-        <tr>
-            <td>Memory Limit:</td>
-            <td>{{ info.MemoryLimit }}</td>
-        </tr>
-        <tr>
-            <td>Swap Limit:</td>
-            <td>{{ info.SwapLimit }}</td>
-        </tr>
-        </tbody>
-    </table>
+</div>
 </div>
