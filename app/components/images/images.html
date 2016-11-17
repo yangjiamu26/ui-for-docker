@@ -105,7 +105,7 @@
                 <td>{{ image|repotag }}</td>
                 <td>{{ image.VirtualSize|humansize }}</td>
                 <td>{{ image.Created * 1000 | date: 'yyyy-MM-dd' }}</td>
-                <td><div class="btn-group detail"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#create-modal">启动容器</button> </div></td>
+                <td><div class="btn-group detail"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#create-modal" ng-click="getId(image.Id)">启动容器</button> </div></td>
             </tr>
         </tbody>
     </table>

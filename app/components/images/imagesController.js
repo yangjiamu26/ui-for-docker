@@ -1,18 +1,22 @@
 angular.module('images', [])
-    .controller('ImagesController', ['$scope', 'Image', 'ViewSpinner', 'Messages',
-        function ($scope, Image, ViewSpinner, Messages) {
+    .controller('ImagesController', ['$rootScope','$scope', 'Image', 'ViewSpinner', 'Messages',
+        function ($rootScope, $scope, Image, ViewSpinner, Messages) {
             $scope.sortType = 'Created';
             $scope.sortReverse = true;
             $scope.toggle = false;
-
+            
             $scope.order = function(sortType) {
                 $scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
                 $scope.sortType = sortType;
             };
 
             $scope.showBuilder = function () {
+
                 $('#build-modal').modal('show');
             };
+            $scope.getId=function(id){
+                $rootScope.imageid = id;
+            }
 
             $scope.removeAction = function () {
                 ViewSpinner.spin();
@@ -46,7 +50,6 @@ angular.module('images', [])
                     i.Checked = $scope.toggle;
                 });
             };
-
             ViewSpinner.spin();
             Image.query({}, function (d) {
                 $scope.images = d.map(function (item) {

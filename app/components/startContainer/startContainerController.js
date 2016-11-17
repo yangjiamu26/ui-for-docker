@@ -1,8 +1,9 @@
 angular.module('startContainer', ['ui.bootstrap'])
-    .controller('StartContainerController', ['$scope', '$routeParams', '$location', 'Container', 'Messages', 'containernameFilter', 'errorMsgFilter',
-        function ($scope, $routeParams, $location, Container, Messages, containernameFilter, errorMsgFilter) {
+    .controller('StartContainerController', ['$rootScope', '$scope', '$routeParams', '$location', 'Container', 'Messages', 'containernameFilter', 'errorMsgFilter',
+        function ($rootScope, $scope, $routeParams, $location, Container, Messages, containernameFilter, errorMsgFilter) {
             $scope.template = 'app/components/startContainer/startcontainer.html';
-
+              
+            
             Container.query({all: 1}, function (d) {
                 $scope.containerNames = d.map(function (container) {
                     return containernameFilter(container);
@@ -55,8 +56,11 @@ angular.module('startContainer', ['ui.bootstrap'])
             $scope.create = function () {
                 // Copy the config before transforming fields to the remote API format
                 var config = angular.copy($scope.config);
-
-                config.Image = $routeParams.id;
+                imageid=$rootScope.imageid;
+                
+    
+                //config.Image = $routeParams.id;
+                config.Image=imageid;
 
                 if (config.Cmd && config.Cmd[0] === "[") {
                     config.Cmd = angular.fromJson(config.Cmd);

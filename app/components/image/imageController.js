@@ -5,6 +5,7 @@ angular.module('image', [])
             $scope.tagInfo = {repo: '', version: '', force: false};
             $scope.id = '';
             $scope.repoTags = [];
+          
 
             $scope.removeImage = function (id) {
                 Image.remove({id: id}, function (d) {
